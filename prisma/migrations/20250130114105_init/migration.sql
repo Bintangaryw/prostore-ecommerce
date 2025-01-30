@@ -6,7 +6,7 @@ CREATE TABLE "Product" (
     "category" TEXT NOT NULL,
     "images" TEXT[],
     "brand" TEXT NOT NULL,
-    "descriptions" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
     "stock" INTEGER NOT NULL,
     "price" DECIMAL(12,2) NOT NULL DEFAULT 0,
     "rating" DECIMAL(3,2) NOT NULL DEFAULT 0,
