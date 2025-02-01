@@ -43,6 +43,15 @@ CREATE TABLE "Session" (
     "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "VerificationToken" (
+    "identifier" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "expires" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "VerificationToken_pkey" PRIMARY KEY ("identifier","token")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "user_email_idx" ON "User"("email");
 
