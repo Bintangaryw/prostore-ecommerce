@@ -54,6 +54,8 @@ export const config = {
         async session({ session, token, user, trigger }: any) {
             // Set the user ID from the token
             session.user.id = token.sub;
+            session.user.name = token.name;
+            session.user.role = token.role;
 
             // If there is an update, set the user's name
             if (trigger == "update") {
@@ -61,6 +63,23 @@ export const config = {
             }
 
             return session;
+        },
+        async jwt({ token, user, trigger, session }: any) {
+            // Assign user fields to token
+            if (user) {
+                token.role = user.role;
+            }
+
+            // If user has no name then use the email
+            if (user.name === "NO_NAME") {
+                token.name = user.email!.split("@")[0];
+            }
+
+            // Update database to reflect the name
+            await prisma.user.update({
+                where: { id: user.id },
+                data: { name: token.name },
+            });
         },
     },
 } satisfies NextAuthConfig;
